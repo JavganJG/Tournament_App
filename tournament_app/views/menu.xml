@@ -1,0 +1,38 @@
+<odoo>
+  <data>
+    <!-- Top menu item -->
+
+    <menuitem name="tournament app" id="tournament_app.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Players" id="tournament_app.menu_player" parent="tournament_app.menu_root"/>
+    <menuitem name="Tournaments" id="tournament_app.menu_tournament" parent="tournament_app.menu_root"/>
+    <menuitem name="Rewards" id="tournament_app.menu_reward" parent="tournament_app.menu_root"/>
+    <menuitem name="Options" id="tournament_app.menu_option" parent="tournament_app.menu_root"/>
+  
+
+    <!-- actions -->
+
+    <menuitem name="Players" id="tournament_app.menu_player_list" parent="tournament_app.menu_player"
+              action="tournament_app.action_window_player"/>
+
+    <menuitem name="Teams" id="tournament_app.menu_team_list" parent="tournament_app.menu_player"
+              action="tournament_app.action_window_team"/>
+
+    <menuitem name="Tournaments" id="tournament_app.menu_tournament_list" parent="tournament_app.menu_tournament"
+              action="tournament_app.action_window_tournament"/>
+
+    <menuitem name="Rewards" id="tournament_app.menu_reward_list" parent="tournament_app.menu_reward"
+              action="tournament_app.action_window_reward"/>
+
+    <menuitem name="Games" id="tournament_app.menu_game_list" parent="tournament_app.menu_option"
+              action="tournament_app.action_window_game"/>
+
+    <menuitem name="Colors" id="tournament_app.menu_color_list" parent="tournament_app.menu_option"
+              action="tournament_app.action_window_color"/>
+
+
+
+  </data>
+</odoo>

@@ -7,7 +7,7 @@
       <field name="model">tournament_app.team_model</field>
       <field name="arch" type="xml">
         <tree>
-  
+
         </tree>
       </field>
     </record>
@@ -30,24 +30,140 @@
       <field name="name">team Form</field>
       <field name="model">tournament_app.team_model</field>
       <field name="arch" type="xml">
-        <form string="Players">
+        <form string="Teams">
           <header>
           </header>
           <sheet>
-          
-          
+            <notebook>
+              <page string="Team settings">
+                <group>
+                  <label for="name" class="oe_edit_only"/>
+                  <h1>
+                    <field name="name"/>
+                  </h1>
+                  <field name="description"/>
+                  <field name="firstColor"/>
+                  <field name="secondColor"/>
+                  <field name="game_id"/>
+                  <field name="wallet"/>
+                </group>
+                <group>
+                  <field name="logo" widget="image"/>
+                </group>
+              </page>
+              <page string="Tournaments">
+                <group>
+                  <field name="tournaments_ids">
+                    <kanban class="o_res_partner_kanban">
+                      <field name="name"/>
+                      <field name="description"/>
+                      <field name="capacity"/>
+                      <templates>
+                        <t t-name="kanban-box">
+                          <div t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                              <field name="logo" nolabel="1" widget="image" class="oe_right oe_avatar"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                              <strong>
+                                <field name="name" class="oe_inline"/>
+                                <br/>
+                                <field name="players" class="oe_inline"/>
+                                <br/>
+                                <field name="prize" class="oe_inline"/>
+                                <br/>
+                                <field name="state" class="oe_inline"/>
+                              </strong>
+                            </div>
+                          </div>
+                        </t>
+                      </templates>
+                    </kanban>
+
+                  </field>
+                </group>
+              </page>
+              <page string="Economy">
+                <group>
+                  <field name="wallet"/>
+                </group>
+              </page>
+              <page string="Players">
+                <group>
+                  <field name="players_ids">
+                    <kanban class="o_res_partner_kanban">
+                      <field name="nickname"/>
+                      <field name="name"/>
+                      <field name="surname"/>
+                      <field name="dni"/>
+                      <field name="phone"/>
+                      <field name="email"/>
+                      <templates>
+                        <t t-name="kanban-box">
+                          <div t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                              <field name="photo" nolabel="1" widget="image" class="oe_right oe_avatar"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                              <strong>
+                                <field name="nickname" class="oe_inline"/>
+                                <field name="name" class="oe_inline"/>
+                                <field name="surname" class="oe_inline"/>
+                              </strong>
+                              <div t-if="record.phone.value">
+                                <t t-esc="record.phone.value"/>
+                              </div>
+                              <div t-if="record.email.value">
+                                <t t-esc="record.email.value"/>
+                              </div>
+                            </div>
+                          </div>
+                        </t>
+                      </templates>
+                    </kanban>
+
+                  </field>
+                </group>
+              </page>
+            </notebook>
+            <group>
+            </group>
           </sheet>
         </form>
       </field>
     </record>
 
-
+    <record model="ir.ui.view" id="tournament_app.team_model_kanban">
+      <field name="name">team list</field>
+      <field name="model">tournament_app.team_model</field>
+      <field name="arch" type="xml">
+        <kanban class="o_res_partner_kanban">
+          <field name="name"/>
+          <field name="description"/>
+          <field name="wallet"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click">
+                <div class="o_kanban_image">
+                  <field name="logo" nolabel="1" widget="image" class="oe_right oe_avatar"/>
+                </div>
+                <div class="oe_kanban_details">
+                  <strong>
+                    <field name="name" class="oe_inline"/> <br/>
+                  </strong>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
     <!-- actions opening views on models -->
 
     <record model="ir.actions.act_window" id="tournament_app.action_window_team">
       <field name="name">Team Window</field>
       <field name="res_model">tournament_app.team_model</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">kanban,tree,form</field>
 
     </record>
 

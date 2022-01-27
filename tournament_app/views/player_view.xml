@@ -55,7 +55,7 @@
                 </group>
 
                 <group>
-                  <field name="photo"/>
+                  <field name="photo" widget="image"/>
                 </group>
               </page>
               <page string="Location">

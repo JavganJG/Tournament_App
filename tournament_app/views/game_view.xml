@@ -12,7 +12,7 @@
       </field>
     </record>
 
-
+    
     <!--<record model="ir.ui.view" id="tournament_app.game_model_search">
       <field name="name">game Filters</field>
       <field name="model">tournament_app.game_model</field>
@@ -30,24 +30,61 @@
       <field name="name">game Form</field>
       <field name="model">tournament_app.game_model</field>
       <field name="arch" type="xml">
-        <form string="games">
+        <form string="Games">
           <header>
           </header>
           <sheet>
-          
-          
+            <notebook>
+              <page string="Game settings">
+                <group>
+                  <label for="name" class="oe_edit_only"/>
+                  <h1>
+                    <field name="name"/>
+                  </h1>
+                  <field name="description"/>
+                </group>
+                <group>
+                  <field name="logo" widget="image"/>
+                </group>
+              </page>
+            </notebook>
+            <group>
+            </group>
           </sheet>
         </form>
       </field>
     </record>
 
-
+    <record model="ir.ui.view" id="tournament_app.game_model_kanban">
+      <field name="name">game list</field>
+      <field name="model">tournament_app.game_model</field>
+      <field name="arch" type="xml">
+        <kanban class="o_res_partner_kanban">
+          <field name="name"/>
+          <field name="description"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click">
+                <div class="o_kanban_image">
+                  <field name="logo" nolabel="1" widget="image" class="oe_right oe_avatar"/>
+                </div>
+                <div class="oe_kanban_details">
+                  <strong>
+                    <field name="name" class="oe_inline"/> <br/>
+                  </strong>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
     <!-- actions opening views on models -->
 
     <record model="ir.actions.act_window" id="tournament_app.action_window_game">
       <field name="name">game Window</field>
       <field name="res_model">tournament_app.game_model</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">kanban,form</field>
 
     </record>
 

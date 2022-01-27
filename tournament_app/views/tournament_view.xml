@@ -7,22 +7,29 @@
       <field name="model">tournament_app.tournament_model</field>
       <field name="arch" type="xml">
         <tree>
-  
+          <field name="name"/>
+          <field name="date"/>
+          <field name="description"/>
+          <field name="prize"/>
+          <field name="game_id"/>
+          <field name="reward_id"/>
+          <field name="winner"/>
         </tree>
       </field>
     </record>
 
 
-    <!--<record model="ir.ui.view" id="tournament_app.tournament_model_search">
+    <record model="ir.ui.view" id="tournament_app.tournament_model_search">
       <field name="name">tournament Filters</field>
       <field name="model">tournament_app.tournament_model</field>
       <field name="arch" type="xml">
         <search>
           <field name="name"/>
-          <filter string="Finished" name="Finished" domain="[('active','=',False)]"/>
+          <!--<filter string="Ended" name="Ended" domain="[('state','=',Ended)]"/>
+          <filter string="Waiting" name="Waiting" domain="[('state','=',Waiting)]"/>-->
         </search>
       </field>
-    </record>-->
+    </record>-
 
 
 
@@ -30,24 +37,147 @@
       <field name="name">tournament Form</field>
       <field name="model">tournament_app.tournament_model</field>
       <field name="arch" type="xml">
-        <form string="Players">
+        <form string="Tournaments">
           <header>
+            <button name="changeState" type="object" string="Change State" class="oe_highlight"/>
+            <button name="returnState" type="object" string="Return State" class="oe_highlight"/>
+            <field name="state" widget="statusbar" statusbar_visible="Waiting,Playing,Final,Ended"/>
           </header>
           <sheet>
-          
-          
+            <notebook>
+              <page string="Tournament settings">
+                <group>
+                  <label for="name" class="oe_edit_only"/>
+                  <h1>
+                    <field name="name"/>
+                  </h1>
+                  <field name="date"/>
+                  <field name="description"/>
+                  <field name="prize"/>
+                  <field name="game_id"/>
+                  <field name="reward_id"/>
+                  <field name="winner"/>
+                </group>
+                <group>
+                  <field name="logo" widget="image"/>
+                </group>
+              </page>
+              <page string="Teams">
+                <group>
+                  <group>
+                    <field name="players"/>
+                    <field name="capacity"/>
+                    <field name="teamSize"/>
+                  </group>
+                  <group>
+                    <field name="teams_ids">
+                      <kanban class="o_res_partner_kanban">
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="wallet"/>
+                        <templates>
+                          <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                              <div class="o_kanban_image">
+                                <field name="logo" nolabel="1" widget="image" class="oe_right oe_avatar"/>
+                              </div>
+                              <div class="oe_kanban_details">
+                                <strong>
+                                  <field name="name" class="oe_inline"/> <br/>
+                                </strong>
+                              </div>
+                            </div>
+                          </t>
+                        </templates>
+                      </kanban>
+                    </field>
+                  </group>
+                </group>
+              </page>
+            </notebook>
+            <group>
+            </group>
           </sheet>
         </form>
       </field>
     </record>
 
+    <record model="ir.ui.view" id="tournament_app.tournament_model_calendar">
+      <field name="name">tournament Calendar</field>
+      <field name="model">tournament_app.tournament_model</field>
+      <field name="arch" type="xml">
+        <calendar date_start="date" color="game_id" mode="month" event_open_popup="True" quick_add="False" form_view_id="tournament_app.tournament_model_form">
+          <field name="name"/>
+          <field name="players"/>
+          <field name="state"/>
+        </calendar>
+      </field>
+    </record>
 
+
+    <record model="ir.ui.view" id="tournament_app.tournament_model_graph">
+      <field name="name">Graph tournament</field>
+      <field name="model">tournament_app.tournament_model</field>
+      <field name="arch" type="xml">
+        <graph type="pie">
+          <field name="game_id" type="row"/>
+          <field name="date" interval="month"/>
+          <field name="prize" type="measure" widget="monetary"/>
+        </graph>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="tournament_app.tournament_model_pivot">
+      <field name="name">tournament pivot</field>
+      <field name="model">tournament_app.tournament_model</field>
+      <field name="arch" type="xml">
+        <pivot string="Pivot tournament">
+          <field name="game_id" type="row"/>
+          <field name="teamSize" type="row"/>
+          <field name="date"/>
+          <field name="prize" type="measure" widget="monetary"/>
+        </pivot>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="tournament_app.tournament_model_kanban">
+      <field name="name">Tournament list</field>
+      <field name="model">tournament_app.tournament_model</field>
+      <field name="arch" type="xml">
+        <kanban class="o_res_partner_kanban">
+          <field name="name"/>
+          <field name="description"/>
+          <field name="capacity"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click">
+                <div class="o_kanban_image">
+                  <field name="logo" nolabel="1" widget="image" class="oe_right oe_avatar"/>
+                </div>
+                <div class="oe_kanban_details">
+                  <strong>
+                    <field name="name" class="oe_inline"/>
+                    <br/>
+                    <field name="players" class="oe_inline"/>
+                    <br/>
+                    <field name="prize" class="oe_inline"/>
+                    <br/>
+                    <field name="state" class="oe_inline"/>
+                  </strong>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
     <!-- actions opening views on models -->
 
     <record model="ir.actions.act_window" id="tournament_app.action_window_tournament">
       <field name="name">Tournament Window</field>
       <field name="res_model">tournament_app.tournament_model</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">kanban,graph,pivot,calendar,tree,form</field>
 
     </record>
 

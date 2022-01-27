@@ -14,3 +14,4 @@ class gameModel(models.Model):
     description = fields.Html(string='Description',required=True,help="game description")
     logo = fields.Binary(string='Photo',help='game\'s logo')
     tournaments_ids = fields.One2many("tournament_app.tournament_model","reward_id",string="Tournaments")
+    teams_ids = fields.One2many("tournament_app.team_model","name",string="Teams")

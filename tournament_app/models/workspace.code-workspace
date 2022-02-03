@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../invoice_app"
+		},
+		{
+			"path": "../../task_app"
+		}
+	],
+	"settings": {}
+}

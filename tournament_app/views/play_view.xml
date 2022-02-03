@@ -2,23 +2,23 @@
   <data>
     <!-- explicit list view definition -->
 
-    <record model="ir.ui.view" id="tournament_app.reward_model_list">
-      <field name="name">reward List</field>
-      <field name="model">tournament_app.reward_model</field>
+    <record model="ir.ui.view" id="tournament_app.play_model_list">
+      <field name="name">play List</field>
+      <field name="model">tournament_app.play_model</field>
       <field name="arch" type="xml">
-        <tree decoration-danger="'prize' &lt; 10.0">
-          <field name="name"/>
-          <field name="description"/>
-          <field name="prize"/>
-  
+        <tree>
+          <field name="date"/>
+          <field name="team_id"/>
+          <field name="tournament_id"/>
+
         </tree>
       </field>
     </record>
 
 
-    <!--<record model="ir.ui.view" id="tournament_app.reward_model_search">
-      <field name="name">reward Filters</field>
-      <field name="model">tournament_app.reward_model</field>
+    <!--<record model="ir.ui.view" id="tournament_app.play_model_search">
+      <field name="name">play Filters</field>
+      <field name="model">tournament_app.play_model</field>
       <field name="arch" type="xml">
         <search>
           <field name="name"/>
@@ -29,24 +29,21 @@
 
 
 
-    <record model="ir.ui.view" id="tournament_app.reward_model_form">
-      <field name="name">reward Form</field>
-      <field name="model">tournament_app.reward_model</field>
+    <record model="ir.ui.view" id="tournament_app.play_model_form">
+      <field name="name">play Form</field>
+      <field name="model">tournament_app.play_model</field>
       <field name="arch" type="xml">
-        <form string="Reward">
+        <form string="play">
           <header>
           </header>
           <sheet>
             <notebook>
-              <page string="Player">
+              <page>
                 <group>
-                  <label for="name" class="oe_edit_only"/>
-                  <h1>
-                    <field name="name"/>
-                  </h1>
-                  <field name="description"/>
-                  <field name="prize"/>
+                  <field name="date"/>
+                  <field name="team_id"/>
                 </group>
+
               </page>
             </notebook>
           </sheet>
@@ -57,9 +54,9 @@
 
     <!-- actions opening views on models -->
 
-    <record model="ir.actions.act_window" id="tournament_app.action_window_reward">
-      <field name="name">Reward Window</field>
-      <field name="res_model">tournament_app.reward_model</field>
+    <record model="ir.actions.act_window" id="tournament_app.action_window_play">
+      <field name="name">play Window</field>
+      <field name="res_model">tournament_app.play_model</field>
       <field name="view_mode">tree,form</field>
 
     </record>

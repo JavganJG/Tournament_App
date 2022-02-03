@@ -32,6 +32,9 @@
     <menuitem name="Colors" id="tournament_app.menu_color_list" parent="tournament_app.menu_option"
               action="tournament_app.action_window_color"/>
 
+    <menuitem name="Imports" id="tournament_app.menu_import_list" parent="tournament_app.menu_option"
+              action="tournament_app.action_window_color"/>
+
 
 
   </data>

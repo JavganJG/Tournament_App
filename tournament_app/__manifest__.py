@@ -32,6 +32,7 @@
         'views/reward_view.xml',
         'views/game_view.xml',
         'views/color_view.xml',
+        'views/play_view.xml',
         'views/menu.xml',
         
     ],

@@ -19,5 +19,11 @@ class teamModel(models.Model):
     players_ids = fields.Many2many("tournament_app.player_model",relation="teams2tplayers_rel",string="Players",help="Players in this team")
     plays_ids= fields.One2many("tournament_app.play_model","team_id",string="Tournaments")
     game_id= fields.Many2one("tournament_app.game_model",required=True,string='Game')
+    category = fields.Selection(string='Category',selection=[('RPG','RPG'),('SANDBOX','SANDBOX'),('INDIE','INDIE'),('SHOOTER','SHOOTER'),('SPORT','SPORT')],default='SHOOTER')
 
+    @api.onchange('category')
+    def onchange_category(self):
+            self.game_id=""
+            domain = {'game_id': [('category', '=', self.category)]}
+            return {'domain': domain} 
     

@@ -25,7 +25,9 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        'security/tournament_security.xml',
         'security/ir.model.access.csv',
+        
         'views/player_view.xml',
         'views/team_view.xml',
         'views/tournament_view.xml',

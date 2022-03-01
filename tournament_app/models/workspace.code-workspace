@@ -1,13 +1,16 @@
 {
 	"folders": [
 		{
-			"path": ".."
-		},
-		{
-			"path": "../../invoice_app"
-		},
-		{
 			"path": "../../task_app"
+		},
+		{
+			"path": "../../multitask_app"
+		},
+		{
+			"path": "../../custom_ranks_tournament_app"
+		},
+		{
+			"path": ".."
 		}
 	],
 	"settings": {}

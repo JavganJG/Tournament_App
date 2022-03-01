@@ -1,0 +1,27 @@
+<odoo>
+
+    <record id="module_tournament_category" model="ir.module.category">
+        <field name="name">Tournament</field>
+    </record>
+
+    <!-- Tournament Creator Group -->
+    <record id="tournament_group_creators" model="res.groups">
+        <field name="name">Creator</field>
+        <field name="category_id" ref="module_tournament_category"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Tournament Moderator Group -->
+    <record id="tournament_group_moders" model="res.groups">
+        <field name="name">Moderator</field>
+        <field name="category_id" ref="module_tournament_category"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+    <!-- Tournament Admin Group -->
+    <record id="tournament_group_administrators" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="module_tournament_category"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+    
+</odoo>

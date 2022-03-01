@@ -11,6 +11,7 @@
           <field name="description"/>
           <field name="firstColor"/>
           <field name="secondColor"/>
+          <field name="category"/>
           <field name="game_id"/>
         </tree>
       </field>
@@ -49,6 +50,7 @@
                   <field name="firstColor"/>
                   <field name="secondColor"/>
                   <field name="game_id"/>
+                  <field name="category"/>
                 </group>
                 <group>
                   <field name="logo" widget="image"/>
@@ -61,7 +63,6 @@
                       <field name="date"/>
                       <field name="tournament_id"/>
                     </tree>
-
                   </field>
                 </group>
               </page>
@@ -103,15 +104,26 @@
                         </t>
                       </templates>
                     </kanban>
-
                   </field>
                 </group>
               </page>
+            
             </notebook>
             <group>
             </group>
           </sheet>
         </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="tournament_app.team_model_graph">
+      <field name="name">Graph team</field>
+      <field name="model">tournament_app.team_model</field>
+      <field name="arch" type="xml">
+        <graph type="pie">
+          <field name="name" type="row"/>
+          <field name="wallet" type="measure" widget="monetary"/>
+        </graph>
       </field>
     </record>
 
@@ -131,7 +143,8 @@
                 </div>
                 <div class="oe_kanban_details">
                   <strong>
-                    <field name="name" class="oe_inline"/> <br/>
+                    <field name="name" class="oe_inline"/>
+                    <br/>
                   </strong>
                 </div>
               </div>

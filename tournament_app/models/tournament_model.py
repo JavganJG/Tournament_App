@@ -24,12 +24,13 @@ class tournamentModel(models.Model):
     winner_id = fields.Many2one("tournament_app.team_model",string='Winner',help="Winner",store=True)
     date = fields.Date(string="Date")
     state = fields.Selection(string='State',selection=[('Waiting','Waiting'),('Playing','Playing'),('Final','Final'),('Ended','Ended')],default='Waiting')
+    category = fields.Selection(string='Category',selection=[('RPG','RPG'),('SANDBOX','SANDBOX'),('INDIE','INDIE'),('SHOOTER','SHOOTER'),('SPORT','SPORT')],default='SHOOTER')
 
-    """@api.onchange('game_id')
+    @api.onchange('category')
     def onchange_category(self):
-            self.plays_ids = []
-            domain = {'plays_ids': [('team_id.game_id', '=', self.game_id)]}
-            return {'domain': domain}  """
+            self.game_id=""
+            domain = {'game_id': [('category', '=', self.category)]}
+            return {'domain': domain} 
 
     @api.depends("capacity","teamSize")
     def changePlayers(self):

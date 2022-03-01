@@ -15,3 +15,5 @@ class gameModel(models.Model):
     logo = fields.Binary(string='Photo',help='game\'s logo')
     tournaments_ids = fields.One2many("tournament_app.tournament_model","reward_id",string="Tournaments")
     teams_ids = fields.One2many("tournament_app.team_model","name",string="Teams")
+    category = fields.Selection(string='Category',selection=[('RPG','RPG'),('SANDBOX','SANDBOX'),('INDIE','INDIE'),('SHOOTER','SHOOTER'),('SPORT','SPORT')],default='SHOOTER')
+
